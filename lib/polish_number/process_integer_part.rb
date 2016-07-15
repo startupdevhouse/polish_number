@@ -23,14 +23,13 @@ module PolishNumber
 
     def over_or_equal_thousand
       scope = digits[0..2]
-      [PolishNumber::ProcessNumber.call(scope),
-       PolishNumber::ProcessThousands.call(@number, scope)].join
+      [ProcessNumber.call(scope), ProcessThousands.call(@number, scope)].join
     end
 
     def less_than_thousand
       [
-        PolishNumber::ProcessNumber.call(digits[3..5]),
-        CURRENCIES[PolishNumber::ClassifyNumbers.call(@number, digits)],
+        ProcessNumber.call(digits[3..5]),
+        CURRENCIES[ClassifyNumbers.call(@number, digits)],
       ].join
     end
 

@@ -16,8 +16,8 @@ module PolishNumber
     def call
       return '' if @number == 0
       [
-        PolishNumber::ProcessNumber.call(digits),
-        CURRENCIES[PolishNumber::ClassifyNumbers.call(@number, digits)],
+        ProcessNumber.call(digits),
+        CURRENCIES[ClassifyNumbers.call(@number, digits)],
       ].join
     end
 
