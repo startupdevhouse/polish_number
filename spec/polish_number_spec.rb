@@ -52,16 +52,26 @@ describe :PolishNumber do
     '1234.324' => 'jeden tysiąc dwieście trzydzieści cztery złote trzydzieści' \
                   ' dwa grosze',
   }.each do |number, translation|
-    it "should translate #{number} to '#{translation}'" do
+    it "translates #{number} to #{translation}" do
       PolishNumber.in_words(number).should == translation
     end
   end
 
-  it "should raise ArgumentError when number is smaller than 0" do
+  it 'raises ArgumentError when number is smaller than 0' do
     lambda { PolishNumber.in_words(-1) }.should.raise(RuntimeError)
   end
 
-  it "should raise ArgumentError when number is greater than 999999999.99" do
+  it 'raises ArgumentError when number is greater than 999999999.99' do
     lambda { PolishNumber.in_words(1_000_000_000) }.should.raise(RuntimeError)
+  end
+
+  {
+    100 => '100 złotych 0 groszy',
+    '12232.43' => '12232 złote 43 grosze',
+    '333,33' => '333 złote 33 grosze',
+  }.each do |number, translation|
+    it 'returns value with currency' do
+      PolishNumber.with_currency(number).should == translation
+    end
   end
 end

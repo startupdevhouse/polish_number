@@ -16,7 +16,7 @@ module PolishNumber
     def call
       value = @number.to_i / 1000
       return '' unless value > 0
-      THOUSANDS[PolishNumber::ClassifyNumbers.call(value, @digits)]
+      THOUSANDS[ClassifyNumbers.call(value, @digits)]
     end
   end # ProcessThousands
 end # module PolishNumber

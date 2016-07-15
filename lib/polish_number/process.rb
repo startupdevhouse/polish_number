@@ -2,25 +2,34 @@ require 'bigdecimal'
 require 'bigdecimal/util'
 require 'polish_number/process_integer_part'
 require 'polish_number/process_decimal_part'
+require 'polish_number/number_with_currency'
 
 module PolishNumber
   class Process
     def initialize(number)
-      unless (0..999_999).cover? BigDecimal.new(number)
+      @number = number.to_s.tr(',','.')
+      unless (0..999_999).cover? BigDecimal.new(@number)
         fail 'Invalid range - (0 - 999_999)'
       end
-      @number = number.to_s
     end
 
     def self.in_words(number)
       new(number).in_words
     end
 
+    def self.with_currency(number)
+      new(number).with_currency
+    end
+
     def in_words
       [
-        PolishNumber::ProcessIntegerPart.call(integer_part),
-        PolishNumber::ProcessDecimalPart.call(decimal_part),
+        ProcessIntegerPart.call(integer_part),
+        ProcessDecimalPart.call(decimal_part),
       ].join(' ').strip
+    end
+
+    def with_currency
+      NumberWithCurrency.call(integer_part, decimal_part)
     end
 
     private
