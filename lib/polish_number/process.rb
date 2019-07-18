@@ -8,7 +8,7 @@ module PolishNumber
   class Process
     def initialize(number)
       @number = number.to_s.tr(',','.')
-      unless (0..999_999).cover? BigDecimal.new(@number)
+      unless (0..999_999).cover? BigDecimal(@number)
         fail 'Invalid range - (0 - 999_999)'
       end
     end
@@ -39,7 +39,7 @@ module PolishNumber
     end
 
     def decimal_part
-      ((BigDecimal.new(@number) - integer_part.to_i) * 100).round(2).to_i.to_s
+      ((BigDecimal(@number) - integer_part.to_i) * 100).round(2).to_i.to_s
     end
   end # class Process
 end # module PolishNumber
