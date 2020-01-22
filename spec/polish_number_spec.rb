@@ -51,6 +51,8 @@ describe :PolishNumber do
     '100.23' => 'sto złotych dwadzieścia trzy grosze',
     '1234.324' => 'jeden tysiąc dwieście trzydzieści cztery złote trzydzieści' \
                   ' dwa grosze',
+    '1234.326' => 'jeden tysiąc dwieście trzydzieści cztery złote trzydzieści' \
+                  ' trzy grosze',
   }.each do |number, translation|
     it "translates #{number} to #{translation}" do
       PolishNumber.in_words(number).should == translation
