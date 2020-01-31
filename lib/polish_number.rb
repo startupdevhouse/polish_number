@@ -10,4 +10,8 @@ module PolishNumber
   def self.with_currency(number)
     Process.with_currency(number.round(2))
   end
+
+  def self.with_short_currency(number)
+    Process.with_short_currency(number.round(2))
+  end
 end
