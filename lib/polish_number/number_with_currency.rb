@@ -4,21 +4,28 @@ require 'polish_number/process_integer_part'
 
 module PolishNumber
   class NumberWithCurrency
-    def initialize(integer, decimal)
+    def initialize(integer, decimal, short)
       @integer = integer
       @decimal = decimal
+      @short = short
     end
 
-    def self.call(integer, decimal)
+    def self.call(integer, decimal, short = false)
       new(integer, decimal).call
     end
 
     def call
+      return numbers_with_short_currency if @short
+
       [@integer, classify_integer_part,
        @decimal, classify_decimal_part].join(' ')
     end
 
     private
+
+    def numbers_with_short_currency
+      [@integer, 'zł', @decimal, 'gr'].join(' ')
+    end
 
     def classify_decimal_part
       ProcessDecimalPart::CURRENCIES[

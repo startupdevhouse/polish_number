@@ -21,6 +21,10 @@ module PolishNumber
       new(number).with_currency
     end
 
+    def self.with_short_currency(number)
+      new(number).with_short_currency
+    end
+
     def in_words
       [
         ProcessIntegerPart.call(integer_part),
@@ -30,6 +34,10 @@ module PolishNumber
 
     def with_currency
       NumberWithCurrency.call(integer_part, decimal_part)
+    end
+
+    def with_short_currency
+      NumberWithCurrency.call(integer_part, decimal_part, true)
     end
 
     private
