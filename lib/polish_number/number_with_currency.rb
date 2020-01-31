@@ -11,7 +11,7 @@ module PolishNumber
     end
 
     def self.call(integer, decimal, short = false)
-      new(integer, decimal).call
+      new(integer, decimal, short).call
     end
 
     def call
