@@ -17,7 +17,7 @@ module PolishNumber
       return '' if @number == 0
       [
         ProcessNumber.call(digits),
-        CURRENCIES[ClassifyNumbers.call(@number, digits)],
+        CURRENCIES[ClassifyNumbers.call(digits)],
       ].join
     end
 
@@ -26,5 +26,5 @@ module PolishNumber
     def digits
       @digits ||= @number.to_s.rjust(3, '0').chars.map(&:to_i)
     end
-  end # class ProcessDecimalPart
-end # module PolishNumber
+  end
+end

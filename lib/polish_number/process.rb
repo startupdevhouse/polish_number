@@ -7,10 +7,8 @@ require 'polish_number/number_with_currency'
 module PolishNumber
   class Process
     def initialize(number)
-      @number = number.to_s.tr(',','.')
-      unless (0..999_999).cover? BigDecimal(@number)
-        fail 'Invalid range - (0 - 999_999)'
-      end
+      @number = number.to_s.tr(',', '.')
+      raise 'Invalid range - (0 - 999_999_999)' unless (0..999_999_999.99).cover? BigDecimal(@number)
     end
 
     def self.in_words(number)
@@ -28,7 +26,7 @@ module PolishNumber
     def in_words
       [
         ProcessIntegerPart.call(integer_part),
-        ProcessDecimalPart.call(decimal_part),
+        ProcessDecimalPart.call(decimal_part)
       ].join(' ').strip
     end
 
@@ -49,5 +47,5 @@ module PolishNumber
     def decimal_part
       ((BigDecimal(@number) - integer_part.to_i) * 100).round(2).to_i.to_s
     end
-  end # class Process
-end # module PolishNumber
+  end
+end
