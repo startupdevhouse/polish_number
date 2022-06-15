@@ -1,8 +1,8 @@
 require 'polish_number/classify_numbers'
 
 module PolishNumber
-  class ProcessThousands
-    THOUSANDS = { one: 'tysiąc', few: 'tysiące', many: 'tysięcy' }.freeze
+  class ProcessMillions
+    MILLIONS = { one: 'milion', few: 'miliony', many: 'milionów' }.freeze
 
     def initialize(number, digits)
       @number = number
@@ -14,10 +14,9 @@ module PolishNumber
     end
 
     def call
-      value = @number.to_i / 1000
-      return '' if @digits.join.to_i == 0
-
-      THOUSANDS[ClassifyNumbers.call(@digits)]
+      value = @number.to_i / 1_000_000
+      return '' unless value > 0
+      MILLIONS[ClassifyNumbers.call(@digits)]
     end
   end
 end

@@ -51,5 +51,5 @@ module PolishNumber
     def third
       @digits[2]
     end
-  end # ProcessNumber
-end # module PolishNumber
+  end
+end

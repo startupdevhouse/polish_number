@@ -29,12 +29,12 @@ module PolishNumber
 
     def classify_decimal_part
       ProcessDecimalPart::CURRENCIES[
-        ClassifyNumbers.call(@decimal, decimal_digits)]
+        ClassifyNumbers.call(decimal_digits)]
     end
 
     def classify_integer_part
       ProcessIntegerPart::CURRENCIES[
-        ClassifyNumbers.call(@integer, integer_digits)]
+        ClassifyNumbers.call(integer_digits)]
     end
 
     def decimal_digits
@@ -45,4 +45,4 @@ module PolishNumber
       @integer_digits ||= @integer.rjust(6, '0').chars.map(&:to_i)
     end
   end
-end # module PolishNumber
+end
